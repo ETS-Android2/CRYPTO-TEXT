@@ -45,6 +45,9 @@ totally lies on the key size and if we double or triple the key size, the
 strength of encryption increases exponentially. RSA keys can be typically
 1024 or 2048 bits long, but experts believe that 1024 bit keys could
 
+![RSA_Algo](https://user-images.githubusercontent.com/63945098/117587371-3f698980-b13b-11eb-8594-c0ce91e43266.png)
+
+
 ## AES Algorithm
 * AES includes three block cipher: AES-128, AES-192 and AES-256.
 AES-128 uses a 128-bit key length to encrypt and decrypt a block of
@@ -71,3 +74,47 @@ using a substitution table; the second transformation shifts data rows, and the
 third mixes columns. The last transformation is performed on each column
 using a different part of the encryption key. Longer keys need more rounds
 to complete.
+
+![AES_Algo](https://user-images.githubusercontent.com/63945098/117587315-e863b480-b13a-11eb-9a3d-410d513413b0.png)
+
+
+# Overall Design(Flowchart)
+## User Login/Signup
+* Used firebase for authentication and user login using google account.
+## RSA
+#### Distribution of Public key
+* When a user logs in, the application will create his/her unique id and
+store that id with thier corresponding public key in the realtime database
+hosted using firebase.
+#### Encryption Of The Text Message
+* The user is asked to enter the receiver’s email ID, the application first
+search for the receiver’s email in the database and verify it.
+* Then if email exists, it will retrive the receiver’s public key from the
+database.
+* Then the user is asked to enter the message that user wants to encrypt.
+* After that the message will be encrypted using the retrieved public key
+and the user can copy or share the cipher text on a less secure
+communication channel.
+#### Decryption Of The Text Message
+* The user is asked to enter the cipher text which he/she recieved from a
+less secure communication channel.
+* The cipher text will be decrypted using the private key of the user.
+## Quantum Key Distribution Protocol
+* Protocol designed to share the key among sender and receiver using
+concepts of quantum computing and quantum cryptography.
+## AES
+#### Key Distribution Using Quantum Key Distribution (QKD)
+* User will be asked to enter receiver’s email id.
+* The application will generate a key that will be distributed among sender
+& receiver using QKD protocol through the quantum channel.
+#### Encryption Of Message
+* Then the user is asked to enter the message that user wants to encrypt.
+* After that the message will be encrypted using the key generated using
+QKD protocol and the user can copy or share the cipher text on a less
+secure communication channel.
+#### Decryption Of The Text Message
+* The user is asked to enter the cipher text which he/she recieved from a
+less secure communication channel.
+* The cipher text will be decrypted using the key of the user.
+
+![Overall](https://user-images.githubusercontent.com/63945098/117587343-1ea13400-b13b-11eb-9358-998bb9ebe1cf.png)
